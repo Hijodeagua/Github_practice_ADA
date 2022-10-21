@@ -211,6 +211,26 @@ ggsave(filename = &quot;Plot.png&quot;, plot = c,
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
+<div id="add-code-to-determine-the-percentage-of-males-and-females-by-class" class="section level2">
+<h2>add code to determine the percentage of males and females by class</h2>
+<pre class="r"><code>class_sex &lt;- rose %&gt;% group_by(Pclass, Sex)
+sum_class_sex &lt;- class_sex %&gt;% 
+  summarise(n = n()) %&gt;%
+  mutate(freq = round(n / sum(n), 3)) </code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;Pclass&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>sum_class_sex</code></pre>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   Pclass [3]
+##   Pclass Sex        n  freq
+##    &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt; &lt;dbl&gt;
+## 1      1 female    94 0.435
+## 2      1 male     122 0.565
+## 3      2 female    76 0.413
+## 4      2 male     108 0.587
+## 5      3 female   144 0.296
+## 6      3 male     343 0.704</code></pre>
+</div>
 
 
 

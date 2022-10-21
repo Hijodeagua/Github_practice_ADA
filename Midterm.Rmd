@@ -36,3 +36,14 @@ ggsave(filename = "Plot.png", plot = c,
 
 
 ```
+
+## add code to determine the percentage of males and females by class
+```{r}
+class_sex <- rose %>% group_by(Pclass, Sex)
+sum_class_sex <- class_sex %>% 
+  summarise(n = n()) %>%
+  mutate(freq = round(n / sum(n), 3)) 
+
+sum_class_sex
+```
+
