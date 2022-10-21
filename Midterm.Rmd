@@ -1,0 +1,38 @@
+---
+title: "Question 3"
+author: "Tremayne Watterson"
+date: "10/20/2022"
+output: html_document
+---
+```{r}
+pacman::p_load(gridExtra, knitr, kableExtra, mosaic, xtable, pscl, multcomp, pander, MASS, tidyverse, lmtest, readr)
+
+```
+## Import csv from github
+```{r, echo=TRUE}
+rose <- read_csv("https://raw.githubusercontent.com/kijohnson/Data/main/titanic.csv")
+```
+## Determine median age by passenger class
+```{r}
+b <- rose%>%
+group_by(Pclass)%>% 
+summarise(Median=median(Age))
+b
+```
+
+##a plot that shows medians, spread of data, and outliers for the continuous variable age according to passenger class
+```{r}
+
+c <- ggplot(data = rose, aes(x = Age)) +
+  geom_histogram() +
+  geom_histogram(color = "black", fill = "red") +
+  labs(x = "Age",
+       title = "Histogram of Age by Class",
+       subtitle = "facet along columns") +
+  facet_grid(~ Pclass)
+
+ggsave(filename = "Plot.png", plot = c,
+       width = 10, height = 4, units = "in", bg="white") 
+
+
+```
